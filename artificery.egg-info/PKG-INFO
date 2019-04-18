@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: artificery
+Version: 0.0.1.1
+Summary: A tool for building deep neural networks from JSON specs in pyTorch.
+Home-page: https://github.com/supersergiy/artificery
+Author: Sergiy Popovych
+Author-email: sergiy.popovich@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Description-Content-Type: text/markdown

@@ -1,0 +1,28 @@
+{
+    "type": "ScaleNet",
+    "downmodules": {
+        "5": {"path": "seq_2_2_skip14.json"}, 
+        "6": {"path": "seq_2_2_skip14.json"}, 
+        "7": {"path": "seq_2_2_skip14.json"}
+    },
+    "upmodules": {
+
+    },
+    "uplinks": {
+       "all": {"path": "average_pool.json"} 
+    },
+    "downlinks": {
+       "all": {"path": "upsample_residual.json"}
+    },
+    "skiplinks": {
+       "all": {"path": "identity.json"}
+    },
+    "combiners": {
+       "all": {
+           "type": "rollback_warp",  
+           "arch_desc": {
+               "rollback": 2
+           }
+        }
+    }
+}

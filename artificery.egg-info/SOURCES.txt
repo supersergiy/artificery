@@ -1,0 +1,8 @@
+README.md
+setup.py
+artificery/__init__.py
+artificery/artificery.py
+artificery.egg-info/PKG-INFO
+artificery.egg-info/SOURCES.txt
+artificery.egg-info/dependency_links.txt
+artificery.egg-info/top_level.txt
