@@ -58,3 +58,4 @@ def parse(params, create_module):
                 module = create_module(spec)
                 net.set_combiner(module, level)
 
+    return net

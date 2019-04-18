@@ -1,4 +1,4 @@
 from scalenet.identity import Identity
 
-def parse(params, creaete_module):
+def parse(params, create_module):
     return Identity()

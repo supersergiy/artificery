@@ -1,9 +1,9 @@
 {
     "type": "ScaleNet",
     "downmodules": {
-        "5": {"path": "seq_2_2_skip14.json"}, 
-        "6": {"path": "seq_2_2_skip14.json"}, 
-        "7": {"path": "seq_2_2_skip14.json"}
+        "5": {"path": "block_5convs_fms24to2_skip14.json"}, 
+        "6": {"path": "block_5convs_fms24to2_skip14.json"}, 
+        "7": {"path": "block_5convs_fms24to2_skip14.json"}
     },
     "upmodules": {
 
@@ -12,7 +12,7 @@
        "all": {"path": "average_pool.json"} 
     },
     "downlinks": {
-       "all": {"path": "upsample_residual.json"}
+       "all": {"path": "upsample_residuals.json"}
     },
     "skiplinks": {
        "all": {"path": "identity.json"}
