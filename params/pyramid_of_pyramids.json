@@ -1,9 +1,9 @@
 {
     "type": "ScaleNet",
     "downmodules": {
-        "5": {"path": "block_5convs_fms2to2_skip14.json"}, 
-        "6": {"path": "block_5convs_fms2to2_skip14.json"}, 
-        "7": {"path": "block_5convs_fms2to2_skip14.json"}
+        "5": {"path": "pyramid.json"}, 
+        "6": {"path": "pyramid.json"}, 
+        "7": {"path": "pyramid.json"}
     },
     "upmodules": {
 

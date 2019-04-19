@@ -1,6 +1,5 @@
-import six
-
 import scalenet
+import six
 
 def parse(params, create_module):
     if 'max_level' in params:
