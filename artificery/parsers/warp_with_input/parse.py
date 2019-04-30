@@ -1,12 +1,9 @@
 import torch
-from scalenet import UpsampleResiduals
 
-class RollbackWarp(torch.nn.Module):
+class WarpWithInput(torch.nn.Module):
     def __init__(self, rollback_range):
         super().__init__()
-        self.rollback_range = rollback_range
-        self.ups_res = UpsampleResiduals()
-        self.ups_img = torch.nn.Upsample(scale_factor=2, mode='bilinear')
+        self.module = None
 
     def forward(self, x, res, state, level):
         #TODO: test whether this is good enough
