@@ -1,5 +1,6 @@
 import torch
 from scalenet import UpsampleResiduals
+from scalenet.residuals import res_warp_img
 
 class RollbackWarp(torch.nn.Module):
     def __init__(self, rollback_range):
@@ -7,8 +8,14 @@ class RollbackWarp(torch.nn.Module):
         self.rollback_range = rollback_range
         self.ups_res = UpsampleResiduals()
         self.ups_img = torch.nn.Upsample(scale_factor=2, mode='bilinear')
+        self.downs_img = torch.nn.AvgPool2d(2)
 
     def forward(self, x, res, state, level):
+        if len(torch.nonzero(res))  == 0: #res is all 0's
+            return x
+
+        res = res.permute(0, 2, 3, 1)
+
         #TODO: test whether this is good enough
         for _ in range(self.rollback_range):
             x = self.ups_img(x)

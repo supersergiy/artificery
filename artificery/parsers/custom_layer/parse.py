@@ -6,4 +6,7 @@ def parse(params, create_module):
         module = importlib.import_module(lib)
         globals()[lib] = module
 
-    return exec(params['code'], globals())
+    exec(params['code'], globals())
+    if result is None:
+        raise Exception("The code argument did not assign a value to 'result' variable")
+    return result

@@ -1,0 +1,23 @@
+{
+    "type": "ScaleNet",
+    "upmodules": {
+        "4": {"path": "block_5convs_fms2to24_skip14.json"}, 
+        "6": {"path": "block_5convs_fms24to24_skip14.json"}
+    },
+    "downmodules": {
+        "4": {"path": "block_5convs_fms24to2_skip14.json"}, 
+        "6": {"path": "block_5convs_fms24to24_skip14.json"}
+    },
+    "uplinks": {
+       "all": {"path": "average_pool.json"} 
+    },
+    "downlinks": {
+       "all": {"path": "interpolate.json"}
+    },
+    "skiplinks": {
+       "all": {"path": "identity.json"}
+    },
+    "combiners": {
+       "all": {"path": "add.json"}
+    }
+}
