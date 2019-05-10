@@ -1,11 +1,11 @@
 import json
 import glob
 import os
-import importlib
+from importlib import util
 
 def import_file(full_name, path):
-    spec = importlib.util.spec_from_file_location(full_name, path)
-    mod = importlib.util.module_from_spec(spec)
+    spec = util.spec_from_file_location(full_name, path)
+    mod = util.module_from_spec(spec)
 
     spec.loader.exec_module(mod)
     return mod
