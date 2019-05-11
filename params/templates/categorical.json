@@ -6,7 +6,7 @@
         "grid": GRID,
         "step": STEP,
         "max_value": MAXVALUE,
-        "train_step": TRAINSTEP
+        "train_step": TRAINST
     }
 }
 
