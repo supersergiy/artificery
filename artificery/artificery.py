@@ -21,6 +21,7 @@ class Artificery():
         self.param_folders = set()
 
     def parse(self, params_file):
+        params_file = os.path.expanduser(params_file)
         print (params_file)
         folder = os.path.dirname(params_file)
 
