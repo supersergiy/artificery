@@ -3,9 +3,19 @@ import torch
 class Vectorizer(torch.nn.Module):
     def __init__(self, out_channels=2, component_channels=7,
                  grid=False, norm_method='softmax',
-                 permute=True, step=1,
+                 permute=True, step=None,
+                 max_value=None,
                  train_step=False):
         super(Vectorizer, self).__init__()
+
+        if step is not None and max_value is not None:
+            raise Exception("Ambiguous specification for categorical regression: "
+                    "both step and max_value are specified")
+        if step is None:
+            if max_value is None:
+                step = 1
+            else:
+                step = max_value / (component_channels//2)
 
         self.out_channels = out_channels
         self.component_channels = component_channels
@@ -14,14 +24,20 @@ class Vectorizer(torch.nn.Module):
         self.grid = grid
 
         if self.grid:
-            self.weights = torch.range(0, self.component_channels - 1, device='cuda',
-                                  requires_grad=False) - self.component_channels//2
+            x, y = torch.meshgrid([torch.range(0, self.component_channels - 1, device='cuda',
+                                 requires_grad=False)]*2
+                                 )
+            x = x - self.component_channels//2
+            y = y - self.component_channels//2
 
+            self.weights = torch.cat((x.unsqueeze(-1), y.unsqueeze(-1)), 2)
+            self.weights = self.weights.view(-1, 2)
         else:
             self.weights = torch.range(0, self.component_channels - 1, device='cuda',
                                   requires_grad=False) - self.component_channels//2
+            self.weights = self.weights.unsqueeze(-1)
+
         self.weights *= step
-        self.weights = self.weights.unsqueeze(1)
 
         if train_step:
             self.weights = torch.nn.Parameter(self.weights)
@@ -66,6 +82,29 @@ class Vectorizer(torch.nn.Module):
             component_result_2d = torch.mm(norm_component_2d, self.weights)
             component_result = component_result_2d.view(list(component.shape[0:-1]) + [1])
             result_components.append(component_result)
+
+        result = torch.cat(result_components, -1)
+        #print ('Result: ', result.shape)
+        #print ('Result: ', torch.mean(result))
+        return result
+
+    def grid_forward(self, x):
+        components = []
+        norm_components = []
+        result_components = []
+
+        ch_start = 0
+        ch_end = self.component_channels**2
+        component = x[..., ch_start:ch_end]
+
+        #print ('Component: ', torch.mean(component))
+        norm_component = self.normer(component)
+        norm_components.append(norm_component)
+        norm_component_2d = norm_component.view(-1, self.component_channels**2)
+        #print (norm_component)
+        component_result_2d = torch.mm(norm_component_2d, self.weights)
+        component_result = component_result_2d.view(list(component.shape[0:-1]) + [self.out_channels])
+        result_components.append(component_result)
 
         result = torch.cat(result_components, -1)
         #print ('Result: ', result.shape)
