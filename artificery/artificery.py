@@ -24,7 +24,6 @@ class Artificery():
         params_file = os.path.expanduser(params_file)
         print (params_file)
         folder = os.path.dirname(params_file)
-
         if folder != '' and folder not in self.param_folders:
             added_folder = True
             self.param_folders.add(folder)
@@ -36,11 +35,15 @@ class Artificery():
                 params = json.load(f)
         else:
             global_path = None
-            for folder in self.param_folders:
-                global_path = find(params_file, folder)
-                if global_path is not None:
+            found = False
+            for parent in self.param_folders:
+                global_path = os.path.join(parent, params_file)
+
+                if os.path.isfile(global_path):
+                    found = True
                     break
-            if global_path is not None:
+
+            if found:
                 with open(global_path, 'r') as f:
                     params = json.load(f)
             else:

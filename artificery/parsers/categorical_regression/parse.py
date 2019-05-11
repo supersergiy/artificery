@@ -69,7 +69,6 @@ class Vectorizer(torch.nn.Module):
         components = []
         norm_components = []
         result_components = []
-
         for c_id in range(self.out_channels):
             ch_start = c_id * self.component_channels
             ch_end = (c_id + 1) * self.component_channels
