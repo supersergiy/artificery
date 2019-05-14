@@ -1,5 +1,5 @@
 import argparse
-from .creator import create_param_files
+from creator import create_param_files
 
 def main():
     parser = argparse.ArgumentParser()
