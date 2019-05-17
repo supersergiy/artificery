@@ -1,0 +1,12 @@
+{
+    "train_params": {
+       "path": "/tigress/popovych/aligner/params/current_training.json" 
+    },
+    "model_params":{
+        "spec_path": "~/artificery/params/m4_categorical_compch65_gridtrue_maxvalue7_outch2_stepnull_trainstfalse.json" 
+    },
+    "data_params":{
+        "path": "/tigress/popovych/aligner/params/data/data_params_m2_augment02.json"
+    },
+    "TODO": ["what modules to train"]
+}

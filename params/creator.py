@@ -36,8 +36,11 @@ def replace_all(text, dic, key_to_upper=False):
         text = text.replace(i, j)
     return text
 
-def get_setting_filename(name, setting, name_flag=None, custom_folder=None):
+def get_setting_filename(name, setting, name_flag=None, custom_folder=None, name_suffix=None):
     filename = name
+    if name_suffix is not None:
+        filename += '_{}'.format(name_suffix)
+
     for k, v in sorted(six.iteritems(setting)):
         filename += '_{}{}'.format(k, v)
     if name_flag is not None:
@@ -50,7 +53,7 @@ def get_setting_filename(name, setting, name_flag=None, custom_folder=None):
         result = os.path.join(custom_folder, filename)
     return result
 
-def create_param_files(name, args, sub_funcs={}, name_flag=None):
+def create_param_files(name, args, sub_funcs={}, name_flag=None, name_suffix=None):
     template_path = './templates/{}.json'.format(name)
     with open(template_path, 'r') as f:
         template_lines = []
@@ -58,7 +61,7 @@ def create_param_files(name, args, sub_funcs={}, name_flag=None):
             template_lines.append(l)
     combos = get_all_combinations(args)
     for setting in combos:
-        filename = get_setting_filename(name, setting, name_flag=name_flag)
+        filename = get_setting_filename(name, setting, name_flag=name_flag, name_suffix=name_suffix)
         if len(sub_funcs) == 0:
             replace_dict = setting
         else:
