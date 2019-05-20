@@ -3,6 +3,7 @@
     "arch_desc": {
         "fms": [24, 24, 24, 24, 24, 24], 
          "initc_mult": 0.00077459, 
-         "skips": {"1": 4}
+         "skips": {"1": 4},
+         "flags": ["instancenorm"]
     }
 }
