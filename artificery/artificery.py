@@ -19,10 +19,12 @@ class Artificery():
     def __init__(self):
         self.reload_parsers()
         self.param_folders = set()
+        self.used_specfiles = []
 
     def parse(self, params_file):
         params_file = os.path.expanduser(params_file)
         print (params_file)
+
         folder = os.path.dirname(params_file)
         if folder != '' and folder not in self.param_folders:
             added_folder = True
@@ -30,9 +32,9 @@ class Artificery():
         else:
             added_folder = False
 
+        found_file = None
         if os.path.isfile(params_file):
-            with open(params_file, 'r') as f:
-                params = json.load(f)
+            found_file = params_file
         else:
             global_path = None
             found = False
@@ -40,14 +42,15 @@ class Artificery():
                 global_path = os.path.join(parent, params_file)
 
                 if os.path.isfile(global_path):
-                    found = True
+                    found_file = global_path
                     break
 
-            if found:
-                with open(global_path, 'r') as f:
-                    params = json.load(f)
-            else:
-                raise Exception("Cannot find params file: {}".format(params_file))
+        if found_file is None:
+            raise Exception("Cannot find params file: {}".format(params_file))
+
+        with open(found_file, 'r') as f:
+            params = json.load(f)
+        self.used_specfiles.append(found_file)
 
         net = self.create_net(params)
         if added_folder:
