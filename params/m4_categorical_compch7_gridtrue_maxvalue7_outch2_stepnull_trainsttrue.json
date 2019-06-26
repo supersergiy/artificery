@@ -8,7 +8,7 @@
                           "arch_desc": {
                               "module_list": [
                                   {"path": "block_5convs_fms2to128_skip14_relu.json"},
-                                  {"path": "categorical/categorical_compch3_gridtrue_maxvalue7_outch2_stepnull_trainsttrue.json"}
+                                  {"path": "categorical/categorical_compch7_gridtrue_maxvalue7_outch2_stepnull_trainsttrue.json"}
                               ]
                           }
                       }
