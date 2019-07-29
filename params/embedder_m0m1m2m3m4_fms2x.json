@@ -1,0 +1,38 @@
+{
+    "type": "TransparentSeq",
+    "modules": [
+        {"path": "block_5convs_fms1to1_skip14.json"},
+        {"type": "sequence",
+          "arch_desc": {
+              "module_list": [
+                  {"path": "average_pool.json"},
+                  {"path": "block_5convs_fms1to2_skip14.json"}
+              ]
+          }
+        },
+        {"type": "sequence",
+          "arch_desc": {
+              "module_list": [
+                  {"path": "average_pool.json"},
+                  {"path": "block_5convs_fms2to4_skip14.json"}
+              ]
+          }
+        },
+        {"type": "sequence",
+          "arch_desc": {
+              "module_list": [
+                  {"path": "average_pool.json"},
+                  {"path": "block_5convs_fms4to8_skip14.json"}
+              ]
+          }
+        },
+        {"type": "sequence",
+          "arch_desc": {
+              "module_list": [
+                  {"path": "average_pool.json"},
+                  {"path": "block_5convs_fms8to16_skip14.json"}
+              ]
+          }
+        }
+    ] 
+}

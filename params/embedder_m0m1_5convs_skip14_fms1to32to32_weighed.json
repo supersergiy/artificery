@@ -1,0 +1,14 @@
+{
+    "type": "ModelWithWeights", 
+    "num_weights": 32,
+    "model": {
+        "type": "TransparentSeq",
+        "modules": [
+            {"path": "block_5convs_fms1to32_skip14.json"},
+            {"path": "average_pool.json"},
+            {"path": "block_5convs_fms32to32_skip14.json"},
+            {"path": "average_pool.json"},
+            {"path": "block_5convs_fms32to32_skip14.json"}
+        ] 
+    }
+}

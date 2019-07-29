@@ -1,0 +1,8 @@
+{
+    "type": "TransparentSeq",
+    "modules": [
+        {"path": "4conv_pool_fms1to32to1.json"},
+        {"path": "4conv_pool_fms1to32to1.json"},
+        {"path": "4conv_pool_fms1to32to1.json"}
+    ] 
+}

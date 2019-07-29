@@ -1,0 +1,18 @@
+{
+  "type": "sequence",
+  "arch_desc": {
+      "module_list": [
+        {
+            "type": "convblock", 
+            "arch_desc": {
+                "fms": [2, 32, 2], 
+                 "initc_mult": 0.00077459, 
+                 "k": 3,
+                 "skips": {},
+                 "flags": ["instancenorm"]
+            }
+        },
+        {"path": "average_pool.json"} 
+      ]
+  }
+}
