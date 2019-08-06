@@ -21,7 +21,7 @@ class Artificery():
         self.param_folders = set()
         self.used_specfiles = []
 
-    def parse(self, params_file):
+    def parse(self, params_file, checkpoint_init=False):
         params_file = os.path.expanduser(params_file)
         print (params_file)
 
@@ -52,13 +52,13 @@ class Artificery():
             params = json.load(f)
         self.used_specfiles.append(found_file)
 
-        net = self.create_net(params)
+        net = self.create_net(params, checkpoint_init=checkpoint_init)
         if added_folder:
             self.param_folders.remove(folder)
 
         return net
 
-    def create_net(self, params):
+    def create_net(self, params, checkpoint_init=False):
         if 'path' in params:
             return self.parse(params['path'])
 
@@ -68,6 +68,8 @@ class Artificery():
         else:
             raise Exception("Neither type nor path specified.")
 
+        if checkpoint_init and 'checkpoint_init' in params:
+           net.load_state_dict(torch.loat(params['checkpoint_init']))
         return net
 
     def reload_parsers(self):
