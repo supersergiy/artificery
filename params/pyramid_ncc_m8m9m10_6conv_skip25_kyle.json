@@ -1,0 +1,138 @@
+{
+    "type": "ScaleNet",
+    "downmodules": {
+        "8": {"type": "warp_with_input_downmodule",
+                  "arch_desc": {
+                      "inner_module": {
+                          "type": "sequence",
+                          "arch_desc": {
+                              "module_list": [
+                                  {"path": "block_6convs_fms2to32_skip25_kyle.json"},
+                                  {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
+                              ]
+                          }
+                      }
+                  }
+             },
+    "9": {"type": "warp_with_input_downmodule",
+                  "arch_desc": {
+                      "inner_module": {
+                          "type": "sequence",
+                          "arch_desc": {
+                              "module_list": [
+                                  {"path": "block_6convs_fms2to32_skip25_kyle.json"},
+                                  {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
+                              ]
+                          }
+                      }
+                  }
+             },
+    "10": {"type": "warp_with_input_downmodule",
+                  "arch_desc": {
+                      "inner_module": {
+                          "type": "sequence",
+                          "arch_desc": {
+                              "module_list": [
+                                  {"path": "block_6convs_fms2to32_skip25_kyle.json"},
+                                  {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
+                              ]
+                          }
+                      }
+                  }
+             }
+    },
+    "upmodules": {
+
+    },
+    "uplinks": {
+       "7": {"type": "fm_range_apply",
+             "module": {
+                  "type": "sequence",
+                  "arch_desc": {
+                      "module_list": [
+                          {
+                              "type": "mask_output_based_on_input", 
+                              "inner_module": {"path": "trained_ncc_m8.json"},
+                              "mask_value": 0,
+                              "mask_fill": 0,
+                              "mask_type": "eq"
+                          },
+                          {
+                              "type": "masked_normalize", 
+                              "mask_value": 0, 
+                              "mask_type": "eq", 
+                              "mask_fill": 0
+                          }
+
+                      ]
+                  },
+                  "trainable": false
+             },
+             "fm_range": 1
+        },
+       "8": {"type": "fm_range_apply",
+             "module": {
+                  "type": "sequence",
+                  "arch_desc": {
+                      "module_list": [
+                          {
+                              "type": "mask_output_based_on_input", 
+                              "inner_module": {"path": "trained_ncc_m9.json"},
+                              "mask_value": 0,
+                              "mask_fill": 0,
+                              "mask_type": "eq"
+                          },
+                          {
+                              "type": "masked_normalize", 
+                              "mask_value": 0, 
+                              "mask_type": "eq", 
+                              "mask_fill": 0
+                          }
+                      ]
+                  },
+                  "trainable": false
+             },
+             "fm_range": 1
+       },
+       "9": {"type": "fm_range_apply",
+             "module": {
+                  "type": "sequence",
+                  "arch_desc": {
+                      "module_list": [
+                          {
+                              "type": "mask_output_based_on_input", 
+                              "inner_module": {"path": "trained_ncc_m10.json"},
+                              "mask_value": 0,
+                              "mask_fill": 0,
+                              "mask_type": "eq"
+                          },
+                          {
+                              "type": "masked_normalize", 
+                              "mask_value": 0, 
+                              "mask_type": "eq", 
+                              "mask_fill": 0
+                          }
+                      ]
+                  },
+
+                  "trainable": false
+             },
+             "fm_range": 1
+       },
+       "10": {"path": "average_pool.json"}
+    },
+    "downlinks": {
+       "all": {"path": "upsample_residuals.json"}
+    },
+    "skiplinks": {
+       "all": {"path": "identity.json"}
+    },
+    "combiners": {
+       "all": {
+           "type": "rollback_warp",  
+           "arch_desc": {
+               "rollback": 0 
+           }
+        }
+    }
+}

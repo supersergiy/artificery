@@ -2,6 +2,7 @@ import json
 import glob
 import os
 from importlib import util
+import torch
 
 def import_file(full_name, path):
     spec = util.spec_from_file_location(full_name, path)
@@ -15,13 +16,30 @@ def find(name, path):
         if name in files:
             return os.path.join(root, name)
 
+def find_file_in_folder_set(filename, folder_set):
+    filename = os.path.expanduser(filename)
+    found_file = None
+
+    if os.path.isfile(filename):
+        found_file = filename
+    else:
+        global_path = None
+        for parent in folder_set:
+            global_path = os.path.join(parent, filename)
+
+            if os.path.isfile(global_path):
+                found_file = global_path
+                break
+    return found_file
+
 class Artificery():
-    def __init__(self):
+    def __init__(self, checkpoint_init):
         self.reload_parsers()
         self.param_folders = set()
         self.used_specfiles = []
+        self.checkpoint_init = checkpoint_init
 
-    def parse(self, params_file, checkpoint_init=False):
+    def parse(self, params_file):
         params_file = os.path.expanduser(params_file)
         print (params_file)
 
@@ -32,19 +50,7 @@ class Artificery():
         else:
             added_folder = False
 
-        found_file = None
-        if os.path.isfile(params_file):
-            found_file = params_file
-        else:
-            global_path = None
-            found = False
-            for parent in self.param_folders:
-                global_path = os.path.join(parent, params_file)
-
-                if os.path.isfile(global_path):
-                    found_file = global_path
-                    break
-
+        found_file = find_file_in_folder_set(params_file, self.param_folders)
         if found_file is None:
             raise Exception("Cannot find params file: {}".format(params_file))
 
@@ -52,13 +58,13 @@ class Artificery():
             params = json.load(f)
         self.used_specfiles.append(found_file)
 
-        net = self.create_net(params, checkpoint_init=checkpoint_init)
+        net = self.create_net(params)
         if added_folder:
             self.param_folders.remove(folder)
 
         return net
 
-    def create_net(self, params, checkpoint_init=False):
+    def create_net(self, params):
         if 'path' in params:
             return self.parse(params['path'])
 
@@ -68,8 +74,18 @@ class Artificery():
         else:
             raise Exception("Neither type nor path specified.")
 
-        if checkpoint_init and 'checkpoint_init' in params:
-           net.load_state_dict(torch.loat(params['checkpoint_init']))
+        if self.checkpoint_init and 'checkpoint_init' in params:
+            checkpoint_file = params['checkpoint_init']
+            found_file = find_file_in_folder_set(checkpoint_file, self.param_folders)
+            if found_file is None:
+                raise Exception("Cannot find init file: {}".format(checkpoint_file))
+            print ("loading weights from {}".format(found_file))
+            net.load_state_dict(torch.load(found_file))
+            print ("loaded! mean weight [0] == {}".format(torch.mean(list(net.parameters())[0])))
+        if 'trainable' in params and params['trainable'] == False:
+            print ("Setting layer to non trainable")
+            for param in net.parameters():
+                param.requires_grad = False
         return net
 
     def reload_parsers(self):
