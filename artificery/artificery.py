@@ -33,7 +33,7 @@ def find_file_in_folder_set(filename, folder_set):
     return found_file
 
 class Artificery():
-    def __init__(self, checkpoint_init):
+    def __init__(self, checkpoint_init=False):
         self.reload_parsers()
         self.param_folders = set()
         self.used_specfiles = []
