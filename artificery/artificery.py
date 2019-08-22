@@ -94,14 +94,16 @@ class Artificery():
 
         self.parsers = {}
         for folder in parser_folders:
-            parser_path = os.path.join(folder, "parse.py")
-            parser_name = folder.split('/')[-1]
+            if os.path.isdir(folder):
+                parser_path = os.path.join(folder, "parse.py")
+                if os.path.isfile(parser_path) :
+                    parser_name = folder.split('/')[-1]
 
-            if parser_name.lower() != parser_name:
-                raise Exception("Parser name cannot contain uppercase letters."
-                                "Violator: {}".format(folder))
+                    if parser_name.lower() != parser_name:
+                        raise Exception("Parser name cannot contain uppercase letters."
+                                        "Violator: {}".format(folder))
 
-            parser  = import_file("parser", parser_path)
-            self.parsers[parser_name] = parser.parse
+                    parser  = import_file("parser", parser_path)
+                    self.parsers[parser_name] = parser.parse
 
 

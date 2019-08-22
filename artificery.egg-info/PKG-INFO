@@ -1,6 +1,6 @@
-Metadata-Version: 1.0
+Metadata-Version: 2.1
 Name: artificery
-Version: 0.0.1.1
+Version: 0.0.2.7
 Summary: A tool for building pyrorch nets from spec files
 Home-page: https://github.com/supersergiy/artificery
 Author: Sergiy Popovych
@@ -8,3 +8,4 @@ Author-email: sergiy.popovich@gmail.com
 License: UNKNOWN
 Description: UNKNOWN
 Platform: UNKNOWN
+Description-Content-Type: text/markdown
