@@ -1,7 +1,7 @@
 {
     "type": "convblock", 
     "arch_desc": {
-        "fms": [1, 32, 32, 1], 
+        "fms": [2, 32, 32, 2], 
          "initc_mult": 0.00077459, 
          "k": 3,
          "skips": {},
