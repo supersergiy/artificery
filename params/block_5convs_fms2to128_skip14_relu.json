@@ -5,6 +5,7 @@
          "initc_mult": 0.00077459, 
          "act": "relu",
          "skips": {"1": 4},
-         "flags": ["instancenorm"]
+         "kyleinit": true,
+         "flags": []
     }
 }

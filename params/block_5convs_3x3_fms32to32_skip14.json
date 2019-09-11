@@ -5,6 +5,7 @@
          "initc_mult": 0.00077459, 
          "skips": {"1": 4},
          "k": 3,
-         "flags": ["instancenorm"]
+         "kyleinit": true,
+         "flags": []
     }
 }

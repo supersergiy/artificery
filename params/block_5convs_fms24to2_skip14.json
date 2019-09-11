@@ -4,6 +4,7 @@
         "fms": [24, 24, 24, 24, 24, 2], 
          "initc_mult": 0.00077459, 
          "skips": {"1": 4},
-         "flags": ["instancenorm"]
+         "kyleinit": true,
+         "flags": []
     }
 }
