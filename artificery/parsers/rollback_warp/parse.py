@@ -17,14 +17,17 @@ class RollbackWarp(torch.nn.Module):
         res = res.permute(0, 2, 3, 1)
 
         #TODO: test whether this is good enough
-        for _ in range(self.rollback_range):
-            x = self.ups_img(x)
-            res  = self.ups_res(res)
-
-        result = res_warp_img(x, res, is_pix_res=True)
-
-        for _ in range(self.rollback_range):
-            result = self.downs_img(result)
+        #for _ in range(self.rollback_range):
+        #    x = self.ups_img(x)
+        #    res  = self.ups_res(res)
+        #import pdb; pdb.set_trace()
+        num_fms = x.shape[1]
+        src = x[:, :num_fms//2]
+        tgt = x[:, num_fms//2:]
+        warped_tgt = res_warp_img(tgt, res, is_pix_res=True, rollback=self.rollback_range)
+        result = torch.cat((src, warped_tgt), 1)
+        #for _ in range(self.rollback_range):
+        #    result = self.downs_img(result)
 
         return result
 

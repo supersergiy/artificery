@@ -4,7 +4,6 @@
         "fms": [1, 32, 32, 32], 
          "initc_mult": 0.00077459, 
          "k": 3,
-         "kyleinit": true,
          "flags": []
     }
 }
