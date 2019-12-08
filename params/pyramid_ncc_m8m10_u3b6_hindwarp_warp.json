@@ -71,7 +71,7 @@
                "type": "hindsight_warp",
                "arch_desc": {
                    "rollback": 0,
-                   "mode": "combine_res",
+                   "mode": "warp_res",
                    "inner_module": {
                           "type": "sequence",
                           "arch_desc": {

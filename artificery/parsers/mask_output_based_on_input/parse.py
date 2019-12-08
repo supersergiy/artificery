@@ -33,7 +33,9 @@ class MaskOutputBasedOnInput(torch.nn.Module):
         ratio = x.shape[2] // target_shape[2]
 
         result = x.clone()
-        result = torch.nn.functional.max_pool2d(result, ratio)
+        #result = torch.nn.functional.max_pool2d(result, ratio)
+        result = torch.nn.functional.avg_pool2d(result, ratio) == 1.0
+        result = result.type(x.type())
 
         if result.shape != target_shape:
             import pdb; pdb.set_trace()

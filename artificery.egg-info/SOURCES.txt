@@ -15,6 +15,7 @@ artificery/parsers/combine_in_out_res/parse.py
 artificery/parsers/convblock/parse.py
 artificery/parsers/custom_layer/parse.py
 artificery/parsers/fm_range_apply/parse.py
+artificery/parsers/hindsight_warp/parse.py
 artificery/parsers/identity/parse.py
 artificery/parsers/interpolate/parse.py
 artificery/parsers/log_softmax/parse.py

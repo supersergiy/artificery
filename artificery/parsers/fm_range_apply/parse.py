@@ -7,7 +7,7 @@ class FmRangeApply(torch.nn.Module):
         self.module = module
         self.fm_range = fm_range
 
-    def forward(self, x):
+    def forward(self, x, *kargs, **kwargs):
         b_in, c_in, *rest_in = x.shape
         assert c_in % self.fm_range == 0
         x_per_fm = x.view(b_in * (c_in // self.fm_range), self.fm_range, *rest_in)
