@@ -22,10 +22,12 @@ artificery/parsers/log_softmax/parse.py
 artificery/parsers/mask_output_based_on_input/parse.py
 artificery/parsers/masked_normalize/parse.py
 artificery/parsers/modelwithweights/parse.py
+artificery/parsers/optimizer/parse.py
 artificery/parsers/rollback_warp/parse.py
 artificery/parsers/scalenet/parse.py
 artificery/parsers/sequence/parse.py
 artificery/parsers/siamese_net/parse.py
+artificery/parsers/split_processor/parse.py
 artificery/parsers/transparentseq/parse.py
 artificery/parsers/upsample_residuals/parse.py
 artificery/parsers/warp_with_input_downmodule/parse.py

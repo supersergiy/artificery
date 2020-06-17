@@ -70,6 +70,8 @@
 
     },
     "upmodules": {
+        "2": {"path": "average_pool.json"},
+        "3": {"path": "average_pool.json"},
         "4": {"type": "fm_range_apply",
               "module": {
                     "type": "split_processor",

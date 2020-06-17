@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="artificery",
-    version="0.0.2.8",
+    version="0.0.3.1",
     author="Sergiy Popovych",
     author_email="sergiy.popovich@gmail.com",
     description="A tool for building pyrorch nets from spec files",

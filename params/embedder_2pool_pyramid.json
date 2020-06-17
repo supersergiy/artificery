@@ -1,0 +1,10 @@
+{
+    "type": "TransparentSeq",
+    "modules": [
+        {"path": "embedder_m0_3x3.json"},
+        {"path": "average_pool.json"},
+        {"path": "embedder_m0_3x3.json"},
+        {"path": "average_pool.json"},
+        {"path": "embedder_m0_3x3.json"}
+    ] 
+}

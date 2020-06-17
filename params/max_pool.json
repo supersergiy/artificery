@@ -1,0 +1,5 @@
+{
+    "type": "custom_layer",
+    "import": ["torch"],
+    "code": "result = torch.nn.MaxPool2d(2)"
+}

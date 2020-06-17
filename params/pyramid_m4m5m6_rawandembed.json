@@ -1,7 +1,8 @@
 {
     "type": "ScaleNet",
     "downmodules": {
-    "7": {"type": "warp_with_input_downmodule",
+    "6": {
+        "type": "warp_with_input_downmodule",
                   "arch_desc": {
                       "inner_module": {
                           "type": "sequence",
@@ -14,26 +15,14 @@
                       }
                   }
              },
-    "6": {"type": "warp_with_input_downmodule",
+    "5": {
+        "type": "warp_with_input_downmodule",
                   "arch_desc": {
                       "inner_module": {
                           "type": "sequence",
                           "arch_desc": {
                               "module_list": [
                                   {"path": "block_6convs_fms8to32_skip25.json"},
-                                  {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
-                              ]
-                          }
-                      }
-                  }
-             },
-    "5": {"type": "warp_with_input_downmodule",
-                  "arch_desc": {
-                      "inner_module": {
-                          "type": "sequence",
-                          "arch_desc": {
-                              "module_list": [
-                                  {"path": "block_6convs_fms4to32_skip25.json"},
                                   {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
                               ]
                           }
@@ -46,7 +35,7 @@
                           "type": "sequence",
                           "arch_desc": {
                               "module_list": [
-                                  {"path": "block_6convs_fms4to32_skip25.json"},
+                                  {"path": "block_6convs_fms8to32_skip25.json"},
                                   {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
                               ]
                           }
@@ -61,7 +50,7 @@
                     "type": "split_processor",
                     "processors": [
                         {"fm_range": [0, 1], "module": {"path": "identity.json"}},
-                        {"fm_range": [0, 1], "module": {"path": "embedder_m0_3x3_fms2x.json"}}
+                        {"fm_range": [0, 1], "module": {"path": "embedder_m0_3x3_fms3x.json"}}
                     ]
                   
               },
@@ -73,26 +62,14 @@
                     "type": "split_processor",
                     "processors": [
                         {"fm_range": [0, 1], "module": {"path": "average_pool.json"}},
-                        {"fm_range": [0, 2], "module": {"path": "embedder_fms2to1.json"}}
+                        {"fm_range": [0, 4], "module": {"path": "embedder_fms4to3.json"}}
                     ]
                   
               },
               "trainable": true,
-              "fm_range": 2 
+              "fm_range": 4 
        },
        "6": {"type": "fm_range_apply",
-             "module": {
-                    "type": "split_processor",
-                    "processors": [
-                        {"fm_range": [0, 1], "module": {"path": "average_pool.json"}},
-                        {"fm_range": [0, 4], "module": {"path": "embedder_fms2to3.json"}}
-                    ]
-                  
-              },
-              "trainable": true,
-              "fm_range": 2 
-       },
-       "7": {"type": "fm_range_apply",
              "module": {
                     "type": "split_processor",
                     "processors": [
@@ -103,13 +80,12 @@
               },
               "trainable": true,
               "fm_range": 4 
-       }
+        }
     },
     "uplinks": {
        "4": {"path": "identity.json"},
        "5": {"path": "identity.json"},
-       "6": {"path": "identity.json"},
-       "7": {"path": "identity.json"}
+       "6": {"path": "identity.json"}
     },
     "downlinks": {
        "all": {"path": "upsample_residuals.json"}

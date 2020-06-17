@@ -5,7 +5,8 @@ class Vectorizer(torch.nn.Module):
                  grid=False, norm_method='softmax',
                  permute=True, step=None,
                  max_value=None,
-                 train_step=False):
+                 train_step=False,
+                 device='cpu'):
         super(Vectorizer, self).__init__()
 
         if step is not None and max_value is not None:
@@ -24,7 +25,7 @@ class Vectorizer(torch.nn.Module):
         self.grid = grid
 
         if self.grid:
-            x, y = torch.meshgrid([torch.range(0, self.component_channels - 1, device='cuda',
+            x, y = torch.meshgrid([torch.range(0, self.component_channels - 1, device=device,
                                  requires_grad=False)]*2
                                  )
             x = x - self.component_channels//2
@@ -33,7 +34,7 @@ class Vectorizer(torch.nn.Module):
             self.weights = torch.cat((x.unsqueeze(-1), y.unsqueeze(-1)), 2)
             self.weights = self.weights.view(-1, 2)
         else:
-            self.weights = torch.range(0, self.component_channels - 1, device='cuda',
+            self.weights = torch.range(0, self.component_channels - 1, device=device,
                                   requires_grad=False) - self.component_channels//2
             self.weights = self.weights.unsqueeze(-1)
 
