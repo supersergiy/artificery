@@ -42,4 +42,4 @@ simplejpeg==1.4.1
 torch==1.6.0+cu101
 torchfields==0.0.5
 torchvision==0.7.0+cu101
-scalenet==0.0.8
+scalenet==0.0.9
