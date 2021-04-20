@@ -11,7 +11,7 @@ class RollbackWarp(torch.nn.Module):
         self.downs_img = torch.nn.AvgPool2d(2)
 
     def forward(self, x, res, state, level):
-        if len(torch.nonzero(res))  == 0: #res is all 0's
+        if res is None or len(torch.nonzero(res))  == 0: #res is all 0's
             return x
 
         res = res.permute(0, 2, 3, 1)
@@ -24,8 +24,12 @@ class RollbackWarp(torch.nn.Module):
         num_fms = x.shape[1]
         src = x[:, :num_fms//2]
         tgt = x[:, num_fms//2:]
-        warped_tgt = res_warp_img(tgt, res, is_pix_res=True, rollback=self.rollback_range)
-        result = torch.cat((src, warped_tgt), 1)
+        #print (f"src: {src[:, 0].mean()}, tgt: {tgt[:, 0].mean()}")
+        warped_src = res_warp_img(src, res, is_pix_res=True, rollback=self.rollback_range)
+
+        #warped_tgt = res_warp_img(tgt, res, is_pix_res=True, rollback=self.rollback_range)
+        result = torch.cat((warped_src, tgt), 1)
+        #result = torch.cat((src, warped_tgt), 1)
         #for _ in range(self.rollback_range):
         #    result = self.downs_img(result)
 

@@ -8,7 +8,7 @@
                           "type": "sequence",
                           "arch_desc": {
                               "module_list": [
-                                  {"path": "block_6convs_fms8to32_skip25.json"},
+                                  {"path": "block_4convs_fms8to32.json"},
                                   {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
                               ]
                           }
@@ -22,7 +22,7 @@
                           "type": "sequence",
                           "arch_desc": {
                               "module_list": [
-                                  {"path": "block_6convs_fms8to32_skip25.json"},
+                                  {"path": "block_4convs_fms8to32.json"},
                                   {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
                               ]
                           }
@@ -35,7 +35,7 @@
                           "type": "sequence",
                           "arch_desc": {
                               "module_list": [
-                                  {"path": "block_6convs_fms8to32_skip25.json"},
+                                  {"path": "block_4convs_fms8to32.json"},
                                   {"path": "categorical/categorical_compch15_gridfalse_maxvalue7_outch2_stepnull_trainsttrue.json"}
                               ]
                           }
