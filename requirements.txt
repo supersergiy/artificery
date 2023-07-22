@@ -15,7 +15,7 @@ edt==2.0.2
 fastremap==1.11.1
 fill-voids==2.0.1
 fpzip==1.1.4
-future==0.18.2
+future==0.18.3
 idna==2.10
 inflection==0.5.1
 iniconfig==1.1.1
