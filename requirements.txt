@@ -39,7 +39,7 @@ pytest==6.2.2
 python-dateutil==2.8.1
 python-jsonschema-objects==0.3.13
 simplejpeg==1.4.1
-torch==1.6.0+cu101
+torch==1.13.1
 torchfields==0.0.5
 torchvision==0.7.0+cu101
 scalenet==0.0.9
